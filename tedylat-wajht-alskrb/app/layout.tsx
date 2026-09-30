@@ -4,7 +4,10 @@ import Script from 'next/script'
 import { Inter, IBM_Plex_Sans_Arabic } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
 
 const plexArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic'],
@@ -43,19 +46,18 @@ export default function RootLayout({
       dir="rtl"
       className={`${inter.variable} ${plexArabic.variable} bg-background`}
     >
-      <body className="antialiased">
-
+      <head>
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721672829345043"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
+      </head>
 
+      <body className="antialiased">
         {children}
 
         {process.env.NODE_ENV === 'production' && <Analytics />}
-
       </body>
     </html>
   )
