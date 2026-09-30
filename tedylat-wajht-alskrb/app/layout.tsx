@@ -5,185 +5,127 @@ import { Inter, IBM_Plex_Sans_Arabic } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({
-subsets: ['latin'],
-variable: '--font-inter',
+  subsets: ['latin'],
+  variable: '--font-inter',
 })
 
 const plexArabic = IBM_Plex_Sans_Arabic({
-subsets: ['arabic'],
-weight: ['400', '500', '600', '700'],
-variable: '--font-arabic',
+  subsets: ['arabic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-arabic',
 })
 
 export const metadata: Metadata = {
-metadataBase: new URL(
-'https://tedylat-wajht-alskrb-mu.vercel.app'
-),
+  metadataBase: new URL(
+    'https://tedylat-wajht-alskrb-mu.vercel.app'
+  ),
 
-title: {
-default:
-'TubeLens | محلل فيديوهات يوتيوب وكتابة اسكربت بالذكاء الاصطناعي',
-template: '%s | TubeLens',
-},
+  title: {
+    default:
+      'TubeLens | محلل فيديوهات يوتيوب وكتابة اسكربت بالذكاء الاصطناعي',
+    template: '%s | TubeLens',
+  },
 
-description:
-'TubeLens أداة مجانية لتحليل فيديوهات يوتيوب واكتشاف المشاهدات والتفاعل والكلمات المفتاحية والوسوم، مع أدوات لكتابة اسكربت الفيديو وتحليل المحتوى بالذكاء الاصطناعي.',
+  description:
+    'TubeLens أداة مجانية لتحليل فيديوهات يوتيوب واكتشاف المشاهدات والتفاعل والكلمات المفتاحية والوسوم، مع أدوات لكتابة اسكربت الفيديو وتحليل المحتوى بالذكاء الاصطناعي.',
 
-applicationName: 'TubeLens',
+  keywords: [
+    'تحليل فيديوهات',
+    'محلل فيديوهات يوتيوب',
+    'تحليل فيديو يوتيوب',
+    'تحليل فيديو بالذكاء الاصطناعي',
+    'تحليل فيديوهات يوتيوب',
+    'كتابة اسكربت',
+    'كتابة اسكربت يوتيوب',
+    'مولد اسكربت فيديو',
+    'تحليل محتوى يوتيوب',
+    'تحليل قناة يوتيوب',
+    'كلمات مفتاحية يوتيوب',
+    'وسوم يوتيوب',
+    'YouTube Video Analyzer',
+    'AI Video Analyzer',
+    'YouTube Script Generator',
+    'AI Video Script Generator',
+    'YouTube Analytics Tool',
+    'TubeLens',
+  ],
 
-authors: [
-{
-name: 'TubeLens',
-},
-],
+  robots: {
+    index: true,
+    follow: true,
+  },
 
-creator: 'TubeLens',
-publisher: 'TubeLens',
+  alternates: {
+    canonical: 'https://tedylat-wajht-alskrb-mu.vercel.app',
+  },
 
-category: 'technology',
+  openGraph: {
+    title: 'TubeLens | محلل فيديوهات يوتيوب',
+    description:
+      'حلل فيديوهات يوتيوب واكتشف المشاهدات والتفاعل والكلمات المفتاحية والوسوم، وأنشئ اسكربتات للفيديو بالذكاء الاصطناعي.',
+    url: 'https://tedylat-wajht-alskrb-mu.vercel.app',
+    siteName: 'TubeLens',
+    type: 'website',
+    locale: 'ar_AR',
+  },
 
-keywords: [
-'تحليل فيديوهات',
-'محلل فيديوهات يوتيوب',
-'تحليل فيديو يوتيوب',
-'تحليل فيديو بالذكاء الاصطناعي',
-'تحليل فيديوهات يوتيوب',
-'تحليل محتوى يوتيوب',
-'تحليل قناة يوتيوب',
-'إحصائيات يوتيوب',
-'مشاهدات يوتيوب',
-'الكلمات المفتاحية يوتيوب',
-'وسوم يوتيوب',
-'كتابة اسكربت',
-'كتابة اسكربت يوتيوب',
-'مولد اسكربت فيديو',
-'اسكربت فيديو بالذكاء الاصطناعي',
-'YouTube Video Analyzer',
-'AI Video Analyzer',
-'YouTube Script Generator',
-'AI Video Script Generator',
-'YouTube Analytics Tool',
-'YouTube Video Analysis',
-'TubeLens',
-],
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TubeLens | محلل فيديوهات يوتيوب',
+    description:
+      'أداة TubeLens لتحليل فيديوهات يوتيوب وكتابة اسكربت الفيديو بالذكاء الاصطناعي.',
+  },
 
-alternates: {
-canonical: '/',
-},
+  icons: {
+    icon: [
+      {
+        url: '/icon-light-32x32.png',
+        media: '(prefers-color-scheme: light)',
+      },
+      {
+        url: '/icon-dark-32x32.png',
+        media: '(prefers-color-scheme: dark)',
+      },
+      {
+        url: '/icon.svg',
+        type: 'image/svg+xml',
+      },
+    ],
+    apple: '/apple-icon.png',
+  },
 
-robots: {
-index: true,
-follow: true,
-googleBot: {
-index: true,
-follow: true,
-'max-image-preview': 'large',
-'max-snippet': -1,
-'max-video-preview': -1,
-},
-},
-
-openGraph: {
-title: 'TubeLens | محلل فيديوهات يوتيوب',
-description:
-'حلل فيديوهات يوتيوب واكتشف المشاهدات والتفاعل والكلمات المفتاحية والوسوم، وأنشئ اسكربتات للفيديو.',
-url: 'https://tedylat-wajht-alskrb-mu.vercel.app',
-siteName: 'TubeLens',
-type: 'website',
-locale: 'ar_AR',
-},
-
-twitter: {
-card: 'summary_large_image',
-title: 'TubeLens | محلل فيديوهات يوتيوب',
-description:
-'أداة لتحليل فيديوهات يوتيوب وكتابة اسكربتات وتحليل المحتوى.',
-},
-
-icons: {
-icon: [
-{
-url: '/icon-light-32x32.png',
-media: '(prefers-color-scheme: light)',
-},
-{
-url: '/icon-dark-32x32.png',
-media: '(prefers-color-scheme: dark)',
-},
-{
-url: '/icon.svg',
-type: 'image/svg+xml',
-},
-],
-apple: '/apple-icon.png',
-},
-
-generator: 'v0.app',
+  generator: 'v0.app',
 }
 
 export const viewport: Viewport = {
-colorScheme: 'dark',
-themeColor: '#0F0F0F',
-}
-
-const structuredData = {
-'@context': 'https://schema.org',
-'@type': 'WebApplication',
-name: 'TubeLens',
-alternateName: 'TubeLens YouTube Toolkit',
-url: 'https://tedylat-wajht-alskrb-mu.vercel.app',
-applicationCategory: 'MultimediaApplication',
-operatingSystem: 'Web Browser',
-inLanguage: ['ar', 'en'],
-description:
-'TubeLens أداة لتحليل فيديوهات يوتيوب واكتشاف المشاهدات والتفاعل والكلمات المفتاحية والوسوم وكتابة اسكربتات الفيديو.',
-featureList: [
-'تحليل فيديوهات يوتيوب',
-'تحليل مشاهدات وتفاعل الفيديو',
-'اكتشاف الكلمات المفتاحية',
-'تحليل الوسوم',
-'تحليل محتوى الفيديو',
-'كتابة اسكربت الفيديو',
-'استخراج النص من الفيديو',
-'أدوات الصوت والفيديو',
-'YouTube Video Analysis',
-'YouTube Script Generator',
-'AI Video Analysis',
-],
+  colorScheme: 'dark',
+  themeColor: '#0F0F0F',
 }
 
 export default function RootLayout({
-children,
+  children,
 }: Readonly<{
-children: React.ReactNode
+  children: React.ReactNode
 }>) {
-return (
-<html
-lang="ar"
-dir="rtl"
-className={`${inter.variable} ${plexArabic.variable} bg-background`}
-> <head> <Script
-       async
-       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721672829345043"
-       crossOrigin="anonymous"
-     />
+  return (
+    <html
+      lang="ar"
+      dir="rtl"
+      className={`${inter.variable} ${plexArabic.variable} bg-background`}
+    >
+      <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721672829345043"
+          crossOrigin="anonymous"
+        />
+      </head>
 
-```
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(structuredData),
-      }}
-    />
-  </head>
+      <body className="antialiased">
+        {children}
 
-  <body className="antialiased">
-    {children}
-
-    {process.env.NODE_ENV === 'production' && <Analytics />}
-  </body>
-</html>
-```
-
-)
+        {process.env.NODE_ENV === 'production' && <Analytics />}
+      </body>
+    </html>
+  )
 }
