@@ -20,24 +20,33 @@ export const metadata: Metadata = {
     'https://tedylat-wajht-alskrb-mu.vercel.app'
   ),
 
-  title:
-    'TubeLens | محلل فيديوهات يوتيوب وكتابة اسكربت بالذكاء الاصطناعي',
+  title: 'TubeLens | محلل فيديوهات يوتيوب وكتابة اسكربت',
 
   description:
-    'TubeLens أداة لتحليل فيديوهات يوتيوب، اكتشاف المشاهدات والكلمات المفتاحية، وكتابة اسكربتات الفيديو بالذكاء الاصطناعي.',
+    'TubeLens أداة لتحليل فيديوهات يوتيوب واكتشاف المشاهدات والكلمات المفتاحية وكتابة اسكربت الفيديو.',
 
   keywords: [
     'تحليل فيديوهات يوتيوب',
     'محلل فيديو يوتيوب',
     'كتابة اسكربت',
     'YouTube Video Analyzer',
-    'AI Video Script Generator',
+    'AI Script Generator',
     'TubeLens',
   ],
 
   robots: {
     index: true,
     follow: true,
+  },
+
+  openGraph: {
+    title: 'TubeLens | محلل فيديوهات يوتيوب',
+    description:
+      'حلل فيديوهات يوتيوب واكتب اسكربتات بالذكاء الاصطناعي.',
+    url: 'https://tedylat-wajht-alskrb-mu.vercel.app',
+    siteName: 'TubeLens',
+    type: 'website',
+    locale: 'ar_AR',
   },
 
   icons: {
@@ -72,13 +81,11 @@ export default function RootLayout({
       </head>
 
       <body className="antialiased">
-
         {children}
 
         {process.env.NODE_ENV === 'production' && (
           <Analytics />
         )}
-
       </body>
 
     </html>
