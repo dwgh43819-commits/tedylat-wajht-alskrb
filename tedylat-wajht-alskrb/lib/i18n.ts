@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Script from 'next/script'
 import { Menu, Sparkles } from 'lucide-react'
 import { dictionaries, isRtl, type Lang, type ToolId } from '@/lib/i18n'
 import { emptyVideo, type VideoInfo } from '@/lib/demo-data'
@@ -11,160 +12,232 @@ import { ScriptExtractor } from './script-extractor'
 import { AudioIsolator } from './audio-isolator'
 import { FullTranscript } from './full-transcript'
 
+
 const seoData = {
-'@context': 'https://schema.org',
-'@type': 'WebApplication',
-name: 'TubeLens',
-alternateName: 'TubeLens YouTube Toolkit',
-url: 'https://tedylat-wajht-alskrb-mu.vercel.app',
-applicationCategory: 'MultimediaApplication',
-operatingSystem: 'Web Browser',
-description:
-'TubeLens is an all-in-one YouTube toolkit for video analysis, YouTube statistics, tags, AI summaries, script extraction, transcripts and audio tools.',
-inLanguage: ['ar', 'en'],
-featureList: [
-'YouTube video analysis',
-'YouTube video statistics',
-'YouTube video tags',
-'AI video summaries',
-'YouTube script extraction',
-'YouTube transcript extraction',
-'Video audio isolation',
-],
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "TubeLens",
+  "alternateName": "TubeLens YouTube Toolkit",
+  "url": "https://tedylat-wajht-alskrb-mu.vercel.app",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Web Browser",
+  "description":
+    "TubeLens tool for YouTube video analysis, statistics, AI summaries, scripts and audio tools.",
+  "inLanguage": ["ar", "en"],
+  "featureList": [
+    "YouTube video analysis",
+    "YouTube statistics",
+    "YouTube tags",
+    "AI video summaries",
+    "YouTube script generator",
+    "Transcript extraction",
+    "Audio isolation"
+  ]
 }
+
 
 export function TubeLensApp() {
-const [lang, setLang] = useState<Lang>('ar')
-const [tool, setTool] = useState<ToolId>('analytics')
-const [video, setVideo] = useState<VideoInfo>(emptyVideo())
-const [menuOpen, setMenuOpen] = useState(false)
-const t = dictionaries[lang]
-const dir = isRtl(lang) ? 'rtl' : 'ltr'
 
-const changeLang = (next: Lang) => {
-setLang(next)
-document.documentElement.lang = next
-document.documentElement.dir = isRtl(next) ? 'rtl' : 'ltr'
-}
+  const [lang, setLang] = useState<Lang>('ar')
+  const [tool, setTool] = useState<ToolId>('analytics')
+  const [video, setVideo] = useState<VideoInfo>(emptyVideo())
+  const [menuOpen, setMenuOpen] = useState(false)
 
-const selectTool = (id: ToolId) => {
-setTool(id)
-setMenuOpen(false)
-}
+  const t = dictionaries[lang]
+  const dir = isRtl(lang) ? 'rtl' : 'ltr'
 
-const hero: Record<ToolId, { title: string; desc: string }> = {
-analytics: {
-title: t.heroAnalytics,
-desc: t.heroAnalyticsDesc,
-},
-script: {
-title: t.heroScript,
-desc: t.heroScriptDesc,
-},
-audio: {
-title: t.heroAudio,
-desc: t.heroAudioDesc,
-},
-}
 
-return ( <div
-   dir={dir}
-   lang={lang}
-   className="flex min-h-dvh bg-background text-foreground"
- >
-{/* SEO structured data - does not change the visual design */}
-<script
-type="application/ld+json"
-dangerouslySetInnerHTML={{
-__html: JSON.stringify(seoData),
-}}
-/>
+  const changeLang = (next: Lang) => {
+    setLang(next)
+    document.documentElement.lang = next
+    document.documentElement.dir = isRtl(next)
+      ? 'rtl'
+      : 'ltr'
+  }
 
-```
-  <Sidebar
-    t={t}
-    lang={lang}
-    active={tool}
-    onSelect={selectTool}
-    onLangChange={changeLang}
-    open={menuOpen}
-    onClose={() => setMenuOpen(false)}
-  />
 
-  <div className="flex min-w-0 flex-1 flex-col">
-    <div className="sticky top-0 z-20 flex items-center border-b border-border bg-background/85 px-4 py-3 backdrop-blur md:hidden">
-      <button
-        type="button"
-        onClick={() => setMenuOpen(true)}
-        className="inline-flex size-10 items-center justify-center rounded-lg border border-border text-muted-foreground hover:text-foreground"
-        aria-label={t.openMenu}
-      >
-        <Menu className="size-5" />
-      </button>
+  const selectTool = (id: ToolId) => {
+    setTool(id)
+    setMenuOpen(false)
+  }
+
+
+  const hero = {
+    analytics:{
+      title:t.heroAnalytics,
+      desc:t.heroAnalyticsDesc
+    },
+    script:{
+      title:t.heroScript,
+      desc:t.heroScriptDesc
+    },
+    audio:{
+      title:t.heroAudio,
+      desc:t.heroAudioDesc
+    }
+  }
+
+
+  return (
+
+    <div
+      dir={dir}
+      lang={lang}
+      className="flex min-h-dvh bg-background text-foreground"
+    >
+
+
+      <Script
+        id="tubelens-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(seoData)
+        }}
+      />
+
+
+      <Sidebar
+        t={t}
+        lang={lang}
+        active={tool}
+        onSelect={selectTool}
+        onLangChange={changeLang}
+        open={menuOpen}
+        onClose={()=>setMenuOpen(false)}
+      />
+
+
+      <div className="flex min-w-0 flex-1 flex-col">
+
+
+        <div className="sticky top-0 z-20 flex items-center border-b border-border bg-background/85 px-4 py-3 backdrop-blur md:hidden">
+
+          <button
+            type="button"
+            onClick={()=>setMenuOpen(true)}
+            className="inline-flex size-10 items-center justify-center rounded-lg border border-border text-muted-foreground"
+          >
+
+            <Menu className="size-5"/>
+
+          </button>
+
+        </div>
+
+
+
+        <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-6 px-4 py-10 md:px-8 md:py-14">
+
+
+          <header className="flex flex-col items-center gap-5 text-center">
+
+
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+
+              <Sparkles className="size-3.5"/>
+
+              {t.heroBadge}
+
+            </span>
+
+
+
+            <h1 className="text-balance text-4xl font-bold tracking-tight md:text-6xl">
+
+              {hero[tool].title}
+
+            </h1>
+
+
+
+            <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+
+              {hero[tool].desc}
+
+            </p>
+
+
+          </header>
+
+
+
+          {tool !== 'audio' && (
+
+            <VideoInput
+              t={t}
+              video={video}
+              onAnalyzed={setVideo}
+            />
+
+          )}
+
+
+
+          {tool === 'analytics' && (
+
+            <AnalyticsTool
+              key={video.id}
+              t={t}
+              lang={lang}
+              video={video}
+            />
+
+          )}
+
+
+
+          {tool === 'script' && (
+
+            <FullTranscript
+              key={`full-${video.id}`}
+              t={t}
+              video={video}
+            />
+
+          )}
+
+
+
+          {tool === 'script' && (
+
+            <ScriptExtractor
+              key={video.id}
+              t={t}
+              video={video}
+            />
+
+          )}
+
+
+
+          {tool === 'audio' && (
+
+            <AudioIsolator t={t}/>
+
+          )}
+
+
+        </main>
+
+
+
+        <footer className="flex flex-col gap-1 border-t border-border px-4 py-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-8">
+
+          <span dir="ltr">
+            © 2026 TubeLens
+          </span>
+
+          <span>
+            {t.footer}
+          </span>
+
+        </footer>
+
+
+      </div>
+
+
     </div>
 
-    <main
-      className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-6 px-4 py-10 md:px-8 md:py-14"
-      aria-label="TubeLens YouTube tools"
-    >
-      <header className="flex flex-col items-center gap-5 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-          <Sparkles className="size-3.5" aria-hidden="true" />
-          {t.heroBadge}
-        </span>
-
-        <h1 className="text-balance text-4xl font-bold tracking-tight md:text-6xl">
-          {hero[tool].title}
-        </h1>
-
-        <p className="max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-          {hero[tool].desc}
-        </p>
-      </header>
-
-      {tool !== 'audio' && (
-        <VideoInput
-          t={t}
-          video={video}
-          onAnalyzed={setVideo}
-        />
-      )}
-
-      {tool === 'analytics' && (
-        <AnalyticsTool
-          key={video.id}
-          t={t}
-          lang={lang}
-          video={video}
-        />
-      )}
-
-      {tool === 'script' && (
-        <FullTranscript
-          key={`full-${video.id}`}
-          t={t}
-          video={video}
-        />
-      )}
-
-      {tool === 'script' && (
-        <ScriptExtractor
-          key={video.id}
-          t={t}
-          video={video}
-        />
-      )}
-
-      {tool === 'audio' && <AudioIsolator t={t} />}
-    </main>
-
-    <footer className="flex flex-col gap-1 border-t border-border px-4 py-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-8">
-      <span dir="ltr">© 2026 TubeLens</span>
-      <span>{t.footer}</span>
-    </footer>
-  </div>
-</div>
-```
-
-)
+  )
 }
