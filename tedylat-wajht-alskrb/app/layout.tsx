@@ -20,33 +20,18 @@ export const metadata: Metadata = {
     'https://tedylat-wajht-alskrb-mu.vercel.app'
   ),
 
-  title: {
-    default:
-      'TubeLens | محلل فيديوهات يوتيوب وكتابة اسكربت بالذكاء الاصطناعي',
-    template: '%s | TubeLens',
-  },
+  title:
+    'TubeLens | محلل فيديوهات يوتيوب وكتابة اسكربت بالذكاء الاصطناعي',
 
   description:
-    'TubeLens أداة مجانية لتحليل فيديوهات يوتيوب واكتشاف المشاهدات والتفاعل والكلمات المفتاحية والوسوم، مع أدوات لكتابة اسكربت الفيديو وتحليل المحتوى بالذكاء الاصطناعي.',
+    'TubeLens أداة لتحليل فيديوهات يوتيوب، اكتشاف المشاهدات والكلمات المفتاحية، وكتابة اسكربتات الفيديو بالذكاء الاصطناعي.',
 
   keywords: [
-    'تحليل فيديوهات',
-    'محلل فيديوهات يوتيوب',
-    'تحليل فيديو يوتيوب',
-    'تحليل فيديو بالذكاء الاصطناعي',
     'تحليل فيديوهات يوتيوب',
+    'محلل فيديو يوتيوب',
     'كتابة اسكربت',
-    'كتابة اسكربت يوتيوب',
-    'مولد اسكربت فيديو',
-    'تحليل محتوى يوتيوب',
-    'تحليل قناة يوتيوب',
-    'كلمات مفتاحية يوتيوب',
-    'وسوم يوتيوب',
     'YouTube Video Analyzer',
-    'AI Video Analyzer',
-    'YouTube Script Generator',
     'AI Video Script Generator',
-    'YouTube Analytics Tool',
     'TubeLens',
   ],
 
@@ -55,46 +40,10 @@ export const metadata: Metadata = {
     follow: true,
   },
 
-  alternates: {
-    canonical: 'https://tedylat-wajht-alskrb-mu.vercel.app',
-  },
-
-  openGraph: {
-    title: 'TubeLens | محلل فيديوهات يوتيوب',
-    description:
-      'حلل فيديوهات يوتيوب واكتشف المشاهدات والتفاعل والكلمات المفتاحية والوسوم، وأنشئ اسكربتات للفيديو بالذكاء الاصطناعي.',
-    url: 'https://tedylat-wajht-alskrb-mu.vercel.app',
-    siteName: 'TubeLens',
-    type: 'website',
-    locale: 'ar_AR',
-  },
-
-  twitter: {
-    card: 'summary_large_image',
-    title: 'TubeLens | محلل فيديوهات يوتيوب',
-    description:
-      'أداة TubeLens لتحليل فيديوهات يوتيوب وكتابة اسكربت الفيديو بالذكاء الاصطناعي.',
-  },
-
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
+    icon: '/icon.svg',
     apple: '/apple-icon.png',
   },
-
-  generator: 'v0.app',
 }
 
 export const viewport: Viewport = {
@@ -104,15 +53,16 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
     <html
       lang="ar"
       dir="rtl"
       className={`${inter.variable} ${plexArabic.variable} bg-background`}
     >
+
       <head>
         <Script
           async
@@ -122,10 +72,15 @@ export default function RootLayout({
       </head>
 
       <body className="antialiased">
+
         {children}
 
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        {process.env.NODE_ENV === 'production' && (
+          <Analytics />
+        )}
+
       </body>
+
     </html>
   )
 }
