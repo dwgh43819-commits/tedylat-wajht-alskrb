@@ -1,3 +1,4 @@
+```tsx
 'use client'
 
 import { useState } from 'react'
@@ -37,7 +38,12 @@ export function TubeLensApp() {
   }
 
   return (
-    <div dir={dir} lang={lang} className="flex min-h-dvh bg-background text-foreground">
+    <div
+      dir={dir}
+      lang={lang}
+      className="flex min-h-dvh bg-background text-foreground"
+      aria-label="TubeLens"
+    >
       <Sidebar
         t={t}
         lang={lang}
@@ -55,33 +61,31 @@ export function TubeLensApp() {
             onClick={() => setMenuOpen(true)}
             className="inline-flex size-10 items-center justify-center rounded-lg border border-border text-muted-foreground hover:text-foreground"
             aria-label={t.openMenu}
+            aria-expanded={menuOpen}
+            aria-controls="tubelens-sidebar"
           >
             <Menu className="size-5" />
           </button>
         </div>
 
-        <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-6 px-4 py-10 md:px-8 md:py-14">
+        <main
+          className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-6 px-4 py-10 md:px-8 md:py-14"
+          aria-labelledby="tubelens-page-title"
+        >
           <header className="flex flex-col items-center gap-5 text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
               <Sparkles className="size-3.5" aria-hidden="true" />
               {t.heroBadge}
             </span>
-            <h1 className="text-balance text-4xl font-bold tracking-tight md:text-6xl">{hero[tool].title}</h1>
-            <p className="max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">{hero[tool].desc}</p>
-          </header>
 
-          {tool !== 'audio' && <VideoInput t={t} video={video} onAnalyzed={setVideo} />}
-          {tool === 'analytics' && <AnalyticsTool key={video.id} t={t} lang={lang} video={video} />}
-          {tool === 'script' && <FullTranscript key={`full-${video.id}`} t={t} video={video} />}
-          {tool === 'script' && <ScriptExtractor key={video.id} t={t} video={video} />}
-          {tool === 'audio' && <AudioIsolator t={t} />}
-        </main>
+            <h1
+              id="tubelens-page-title"
+              className="text-balance text-4xl font-bold tracking-tight md:text-6xl"
+            >
+              {hero[tool].title}
+            </h1>
 
-        <footer className="flex flex-col gap-1 border-t border-border px-4 py-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-8">
-          <span dir="ltr">© 2026 TubeLens</span>
-          <span>{t.footer}</span>
-        </footer>
-      </div>
-    </div>
-  )
-}
+            <p
+              id="tubelens-page-description"
+              className="max-w-xl text-pretty text-base leading-relaxed text
+```
