@@ -1,3 +1,4 @@
+```tsx
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
@@ -16,18 +17,66 @@ const plexArabic = IBM_Plex_Sans_Arabic({
 })
 
 export const metadata: Metadata = {
-  title: 'TubeLens — All-in-One YouTube Toolkit',
+  metadataBase: new URL('https://tedylat-wajht-alskrb-mu.vercel.app'),
+
+  title: {
+    default: 'TubeLens | محلل فيديوهات يوتيوب وكتابة اسكربت بالذكاء الاصطناعي',
+    template: '%s | TubeLens',
+  },
+
   description:
-    'Video analytics, tags, AI summaries, script extraction and AI audio isolation for YouTube creators. Available in Arabic and English.',
-  generator: 'v0.app',
+    'TubeLens أداة مجانية لتحليل فيديوهات يوتيوب واكتشاف المشاهدات والتفاعل والكلمات المفتاحية والوسوم، مع أدوات لكتابة اسكربت الفيديو وتحليل المحتوى بالذكاء الاصطناعي.',
+
+  keywords: [
+    'تحليل فيديوهات',
+    'محلل فيديوهات يوتيوب',
+    'تحليل فيديو يوتيوب',
+    'تحليل فيديو بالذكاء الاصطناعي',
+    'تحليل فيديوهات يوتيوب',
+    'كتابة اسكربت',
+    'كتابة اسكربت يوتيوب',
+    'مولد اسكربت فيديو',
+    'YouTube Video Analyzer',
+    'AI Video Analyzer',
+    'YouTube Script Generator',
+    'AI Video Script Generator',
+    'TubeLens',
+  ],
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  openGraph: {
+    title: 'TubeLens | محلل فيديوهات يوتيوب',
+    description:
+      'حلل فيديوهات يوتيوب واكتشف المشاهدات والتفاعل والكلمات المفتاحية والوسوم، وأنشئ اسكربتات للفيديو.',
+    url: 'https://tedylat-wajht-alskrb-mu.vercel.app',
+    siteName: 'TubeLens',
+    type: 'website',
+    locale: 'ar_AR',
+  },
+
   icons: {
     icon: [
-      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
+      {
+        url: '/icon-light-32x32.png',
+        media: '(prefers-color-scheme: light)',
+      },
+      {
+        url: '/icon-dark-32x32.png',
+        media: '(prefers-color-scheme: dark)',
+      },
+      {
+        url: '/icon.svg',
+        type: 'image/svg+xml',
+      },
     ],
     apple: '/apple-icon.png',
   },
+
+  generator: 'v0.app',
 }
 
 export const viewport: Viewport = {
@@ -62,3 +111,4 @@ export default function RootLayout({
     </html>
   )
 }
+```
