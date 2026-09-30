@@ -43,19 +43,19 @@ export default function RootLayout({
       dir="rtl"
       className={`${inter.variable} ${plexArabic.variable} bg-background`}
     >
-      <head>
+      <body className="antialiased">
+
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721672829345043"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-      </head>
 
-      <body className="antialiased">
         {children}
 
         {process.env.NODE_ENV === 'production' && <Analytics />}
+
       </body>
     </html>
   )
