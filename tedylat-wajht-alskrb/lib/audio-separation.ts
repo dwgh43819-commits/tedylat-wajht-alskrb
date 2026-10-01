@@ -28,7 +28,10 @@ export class SeparationError extends Error {
   }
 }
 
-const CORE_BASE = '/ffmpeg'
+// FFmpeg core is loaded from the official jsDelivr CDN instead of being
+// committed to GitHub. The WASM binary is ~32 MB, which exceeds GitHub's
+// browser upload limit.
+const CORE_BASE = 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/umd'
 const WASM_SIZE = 32_232_419
 const MOUNT = '/input'
 const VIDEO_EXTS = ['mp4', 'mov', 'm4v', 'mkv', 'webm', 'avi']
@@ -56,12 +59,17 @@ function getEngine(onLoadProgress: (ratio: number) => void) {
   if (!enginePromise) {
     enginePromise = (async () => {
       const { FFmpeg } = await import('@ffmpeg/ffmpeg')
+      const { toBlobURL } = await import('@ffmpeg/util')
       const ffmpeg = new FFmpeg()
-      const base = new URL(CORE_BASE, window.location.origin).href
-      const wasmURL = await fetchWithProgress(`${base}/ffmpeg-core.wasm`, onLoadProgress)
+
+      const coreURL = await toBlobURL(`${CORE_BASE}/ffmpeg-core.js`, 'text/javascript')
+      const wasmURL = await fetchWithProgress(
+        `${CORE_BASE}/ffmpeg-core.wasm`,
+        onLoadProgress,
+      )
+
       await ffmpeg.load({
-        classWorkerURL: `${base}/worker.js`,
-        coreURL: `${base}/ffmpeg-core.js`,
+        coreURL,
         wasmURL,
       })
       return ffmpeg

@@ -1,4 +1,3 @@
-```tsx
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
@@ -18,12 +17,9 @@ const plexArabic = IBM_Plex_Sans_Arabic({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://tedylat-wajht-alskrb-mu.vercel.app'),
-
   title: 'TubeLens | محلل فيديوهات يوتيوب وكتابة اسكربت',
-
   description:
     'TubeLens أداة لتحليل فيديوهات يوتيوب واكتشاف المشاهدات والكلمات المفتاحية وكتابة اسكربت الفيديو.',
-
   keywords: [
     'تحليل فيديوهات يوتيوب',
     'محلل فيديو يوتيوب',
@@ -32,24 +28,24 @@ export const metadata: Metadata = {
     'AI Script Generator',
     'TubeLens',
   ],
-
   robots: {
     index: true,
     follow: true,
   },
-
   openGraph: {
     title: 'TubeLens | محلل فيديوهات يوتيوب',
-    description:
-      'حلل فيديوهات يوتيوب واكتب اسكربتات بالذكاء الاصطناعي.',
+    description: 'حلل فيديوهات يوتيوب واكتب اسكربتات بالذكاء الاصطناعي.',
     url: 'https://tedylat-wajht-alskrb-mu.vercel.app',
     siteName: 'TubeLens',
     type: 'website',
     locale: 'ar_AR',
   },
-
   icons: {
-    icon: '/icon.svg',
+    icon: [
+      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
+      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
     apple: '/apple-icon.png',
   },
 }
@@ -61,46 +57,43 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   return (
     <html
       lang="ar"
       dir="rtl"
       className={`${inter.variable} ${plexArabic.variable} bg-background`}
     >
-      <body className="antialiased">
-        {children}
-
+      <head>
+        {/* Google Analytics / Google tag */}
         <Script
+          async
           src="https://www.googletagmanager.com/gtag/js?id=G-9SQ7G09KBD"
-          strategy="afterInteractive"
         />
-
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-        >
+        <Script id="google-analytics">
           {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){window.dataLayer.push(arguments);}
+            function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-9SQ7G09KBD');
           `}
         </Script>
 
+        {/* Google AdSense */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721672829345043"
           crossOrigin="anonymous"
         />
+      </head>
 
-        {process.env.NODE_ENV === 'production' && (
-          <Analytics />
-        )}
+      <body className="antialiased">
+        {children}
+
+        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
 }
-```
