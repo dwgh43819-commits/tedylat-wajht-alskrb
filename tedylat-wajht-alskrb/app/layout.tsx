@@ -17,9 +17,7 @@ const plexArabic = IBM_Plex_Sans_Arabic({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    'https://tedylat-wajht-alskrb-mu.vercel.app'
-  ),
+  metadataBase: new URL('https://tedylat-wajht-alskrb-mu.vercel.app'),
 
   title: 'TubeLens | محلل فيديوهات يوتيوب وكتابة اسكربت',
 
@@ -72,14 +70,18 @@ export default function RootLayout({
       dir="rtl"
       className={`${inter.variable} ${plexArabic.variable} bg-background`}
     >
-      <head>
-        {/* Google Analytics */}
+      <body className="antialiased">
+        {children}
+
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-9SQ7G09KBD"
           strategy="afterInteractive"
         />
 
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+        >
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){window.dataLayer.push(arguments);}
@@ -88,16 +90,11 @@ export default function RootLayout({
           `}
         </Script>
 
-        {/* Google AdSense */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721672829345043"
           crossOrigin="anonymous"
         />
-      </head>
-
-      <body className="antialiased">
-        {children}
 
         {process.env.NODE_ENV === 'production' && (
           <Analytics />
