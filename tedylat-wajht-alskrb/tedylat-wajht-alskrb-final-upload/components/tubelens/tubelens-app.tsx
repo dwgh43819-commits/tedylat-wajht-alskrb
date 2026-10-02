@@ -10,7 +10,7 @@ import { AnalyticsTool } from './analytics-tool'
 import { ScriptExtractor } from './script-extractor'
 import { AudioIsolator } from './audio-isolator'
 import { FullTranscript } from './full-transcript'
-import { NativeBanner } from '@/components/ads/native-banner'
+import { NativeBanner } from '../ads/native-banner'
 
 export function TubeLensApp() {
   const [lang, setLang] = useState<Lang>('ar')
@@ -95,7 +95,6 @@ export function TubeLensApp() {
 
           </header>
 
-
           {tool !== 'audio' && (
             <VideoInput
               t={t}
@@ -104,10 +103,8 @@ export function TubeLensApp() {
             />
           )}
 
-
           {/* Adsterra Native Banner */}
           <NativeBanner />
-
 
           {tool === 'analytics' && (
             <AnalyticsTool
@@ -117,7 +114,6 @@ export function TubeLensApp() {
               video={video}
             />
           )}
-
 
           {tool === 'script' && (
             <>
@@ -135,13 +131,11 @@ export function TubeLensApp() {
             </>
           )}
 
-
           {tool === 'audio' && (
             <AudioIsolator t={t} />
           )}
 
         </main>
-
 
         <footer className="flex flex-col gap-1 border-t border-border px-4 py-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-8">
 
