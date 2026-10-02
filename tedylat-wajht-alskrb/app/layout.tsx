@@ -113,6 +113,14 @@ export default function RootLayout({
           data-cfasync="false"
           strategy="afterInteractive"
         />
+
+        {/* Adsterra DCENGG */}
+        <Script
+          id="adsterra-dcengg"
+          src="https://dcengg.org/14/0ffd0cfc67988e1f614e62faec4e17eb"
+          data-cfasync="false"
+          strategy="afterInteractive"
+        />
       </head>
 
       <body className="antialiased">
