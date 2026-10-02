@@ -11,11 +11,15 @@ import { ScriptExtractor } from './script-extractor'
 import { AudioIsolator } from './audio-isolator'
 import { FullTranscript } from './full-transcript'
 
+import { NativeBanner } from '../ads/native-banner'
+import { Banner300 } from '../ads/banner-300'
+
 export function TubeLensApp() {
   const [lang, setLang] = useState<Lang>('ar')
   const [tool, setTool] = useState<ToolId>('analytics')
   const [video, setVideo] = useState<VideoInfo>(emptyVideo())
   const [menuOpen, setMenuOpen] = useState(false)
+
   const t = dictionaries[lang]
   const dir = isRtl(lang) ? 'rtl' : 'ltr'
 
@@ -31,13 +35,26 @@ export function TubeLensApp() {
   }
 
   const hero: Record<ToolId, { title: string; desc: string }> = {
-    analytics: { title: t.heroAnalytics, desc: t.heroAnalyticsDesc },
-    script: { title: t.heroScript, desc: t.heroScriptDesc },
-    audio: { title: t.heroAudio, desc: t.heroAudioDesc },
+    analytics: {
+      title: t.heroAnalytics,
+      desc: t.heroAnalyticsDesc,
+    },
+    script: {
+      title: t.heroScript,
+      desc: t.heroScriptDesc,
+    },
+    audio: {
+      title: t.heroAudio,
+      desc: t.heroAudioDesc,
+    },
   }
 
   return (
-    <div dir={dir} lang={lang} className="flex min-h-dvh bg-background text-foreground">
+    <div
+      dir={dir}
+      lang={lang}
+      className="flex min-h-dvh bg-background text-foreground"
+    >
       <Sidebar
         t={t}
         lang={lang}
@@ -66,14 +83,55 @@ export function TubeLensApp() {
               <Sparkles className="size-3.5" aria-hidden="true" />
               {t.heroBadge}
             </span>
-            <h1 className="text-balance text-4xl font-bold tracking-tight md:text-6xl">{hero[tool].title}</h1>
-            <p className="max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">{hero[tool].desc}</p>
+
+            <h1 className="text-balance text-4xl font-bold tracking-tight md:text-6xl">
+              {hero[tool].title}
+            </h1>
+
+            <p className="max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+              {hero[tool].desc}
+            </p>
           </header>
 
-          {tool !== 'audio' && <VideoInput t={t} video={video} onAnalyzed={setVideo} />}
-          {tool === 'analytics' && <AnalyticsTool key={video.id} t={t} lang={lang} video={video} />}
-          {tool === 'script' && <FullTranscript key={`full-${video.id}`} t={t} video={video} />}
-          {tool === 'script' && <ScriptExtractor key={video.id} t={t} video={video} />}
+          {tool !== 'audio' && (
+            <VideoInput
+              t={t}
+              video={video}
+              onAnalyzed={setVideo}
+            />
+          )}
+
+          {/* Native Ad */}
+          <NativeBanner />
+
+          {/* 300x250 Adsterra Banner */}
+          <Banner300 />
+
+          {tool === 'analytics' && (
+            <AnalyticsTool
+              key={video.id}
+              t={t}
+              lang={lang}
+              video={video}
+            />
+          )}
+
+          {tool === 'script' && (
+            <>
+              <FullTranscript
+                key={`full-${video.id}`}
+                t={t}
+                video={video}
+              />
+
+              <ScriptExtractor
+                key={video.id}
+                t={t}
+                video={video}
+              />
+            </>
+          )}
+
           {tool === 'audio' && <AudioIsolator t={t} />}
         </main>
 
