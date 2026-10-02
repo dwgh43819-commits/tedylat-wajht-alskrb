@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
 import { Inter, IBM_Plex_Sans_Arabic } from 'next/font/google'
+import type { ReactNode } from 'react'
 import './globals.css'
 
 const inter = Inter({
@@ -17,9 +18,12 @@ const plexArabic = IBM_Plex_Sans_Arabic({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://tedylat-wajht-alskrb-mu.vercel.app'),
+
   title: 'TubeLens | محلل فيديوهات يوتيوب وكتابة اسكربت',
+
   description:
     'TubeLens أداة لتحليل فيديوهات يوتيوب واكتشاف المشاهدات والكلمات المفتاحية وكتابة اسكربت الفيديو.',
+
   keywords: [
     'تحليل فيديوهات يوتيوب',
     'محلل فيديو يوتيوب',
@@ -28,23 +32,36 @@ export const metadata: Metadata = {
     'AI Script Generator',
     'TubeLens',
   ],
+
   robots: {
     index: true,
     follow: true,
   },
+
   openGraph: {
     title: 'TubeLens | محلل فيديوهات يوتيوب',
-    description: 'حلل فيديوهات يوتيوب واكتب اسكربتات بالذكاء الاصطناعي.',
+    description:
+      'حلل فيديوهات يوتيوب واكتب اسكربتات بالذكاء الاصطناعي.',
     url: 'https://tedylat-wajht-alskrb-mu.vercel.app',
     siteName: 'TubeLens',
     type: 'website',
     locale: 'ar_AR',
   },
+
   icons: {
     icon: [
-      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
+      {
+        url: '/icon-light-32x32.png',
+        media: '(prefers-color-scheme: light)',
+      },
+      {
+        url: '/icon-dark-32x32.png',
+        media: '(prefers-color-scheme: dark)',
+      },
+      {
+        url: '/icon.svg',
+        type: 'image/svg+xml',
+      },
     ],
     apple: '/apple-icon.png',
   },
@@ -58,7 +75,7 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: ReactNode
 }>) {
   return (
     <html
@@ -72,6 +89,7 @@ export default function RootLayout({
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-9SQ7G09KBD"
         />
+
         <Script id="google-analytics">
           {`
             window.dataLayer = window.dataLayer || [];
