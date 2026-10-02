@@ -10,12 +10,14 @@ import { AnalyticsTool } from './analytics-tool'
 import { ScriptExtractor } from './script-extractor'
 import { AudioIsolator } from './audio-isolator'
 import { FullTranscript } from './full-transcript'
+import { NativeBanner } from '@/components/ads/native-banner'
 
 export function TubeLensApp() {
   const [lang, setLang] = useState<Lang>('ar')
   const [tool, setTool] = useState<ToolId>('analytics')
   const [video, setVideo] = useState<VideoInfo>(emptyVideo())
   const [menuOpen, setMenuOpen] = useState(false)
+
   const t = dictionaries[lang]
   const dir = isRtl(lang) ? 'rtl' : 'ltr'
 
@@ -31,13 +33,26 @@ export function TubeLensApp() {
   }
 
   const hero: Record<ToolId, { title: string; desc: string }> = {
-    analytics: { title: t.heroAnalytics, desc: t.heroAnalyticsDesc },
-    script: { title: t.heroScript, desc: t.heroScriptDesc },
-    audio: { title: t.heroAudio, desc: t.heroAudioDesc },
+    analytics: {
+      title: t.heroAnalytics,
+      desc: t.heroAnalyticsDesc,
+    },
+    script: {
+      title: t.heroScript,
+      desc: t.heroScriptDesc,
+    },
+    audio: {
+      title: t.heroAudio,
+      desc: t.heroAudioDesc,
+    },
   }
 
   return (
-    <div dir={dir} lang={lang} className="flex min-h-dvh bg-background text-foreground">
+    <div
+      dir={dir}
+      lang={lang}
+      className="flex min-h-dvh bg-background text-foreground"
+    >
       <Sidebar
         t={t}
         lang={lang}
@@ -49,6 +64,7 @@ export function TubeLensApp() {
       />
 
       <div className="flex min-w-0 flex-1 flex-col">
+
         <div className="sticky top-0 z-20 flex items-center border-b border-border bg-background/85 px-4 py-3 backdrop-blur md:hidden">
           <button
             type="button"
@@ -61,27 +77,86 @@ export function TubeLensApp() {
         </div>
 
         <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-6 px-4 py-10 md:px-8 md:py-14">
+
           <header className="flex flex-col items-center gap-5 text-center">
+
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
               <Sparkles className="size-3.5" aria-hidden="true" />
               {t.heroBadge}
             </span>
-            <h1 className="text-balance text-4xl font-bold tracking-tight md:text-6xl">{hero[tool].title}</h1>
-            <p className="max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">{hero[tool].desc}</p>
+
+            <h1 className="text-balance text-4xl font-bold tracking-tight md:text-6xl">
+              {hero[tool].title}
+            </h1>
+
+            <p className="max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+              {hero[tool].desc}
+            </p>
+
           </header>
 
-          {tool !== 'audio' && <VideoInput t={t} video={video} onAnalyzed={setVideo} />}
-          {tool === 'analytics' && <AnalyticsTool key={video.id} t={t} lang={lang} video={video} />}
-          {tool === 'script' && <FullTranscript key={`full-${video.id}`} t={t} video={video} />}
-          {tool === 'script' && <ScriptExtractor key={video.id} t={t} video={video} />}
-          {tool === 'audio' && <AudioIsolator t={t} />}
+
+          {tool !== 'audio' && (
+            <VideoInput
+              t={t}
+              video={video}
+              onAnalyzed={setVideo}
+            />
+          )}
+
+
+          {/* Adsterra Native Banner */}
+          <NativeBanner />
+
+
+          {tool === 'analytics' && (
+            <AnalyticsTool
+              key={video.id}
+              t={t}
+              lang={lang}
+              video={video}
+            />
+          )}
+
+
+          {tool === 'script' && (
+            <>
+              <FullTranscript
+                key={`full-${video.id}`}
+                t={t}
+                video={video}
+              />
+
+              <ScriptExtractor
+                key={video.id}
+                t={t}
+                video={video}
+              />
+            </>
+          )}
+
+
+          {tool === 'audio' && (
+            <AudioIsolator t={t} />
+          )}
+
         </main>
 
+
         <footer className="flex flex-col gap-1 border-t border-border px-4 py-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-8">
-          <span dir="ltr">© 2026 TubeLens</span>
-          <span>{t.footer}</span>
+
+          <span dir="ltr">
+            © 2026 TubeLens
+          </span>
+
+          <span>
+            {t.footer}
+          </span>
+
         </footer>
+
       </div>
+
     </div>
   )
 }
