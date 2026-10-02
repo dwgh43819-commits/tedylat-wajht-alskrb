@@ -84,7 +84,7 @@ export default function RootLayout({
       className={`${inter.variable} ${plexArabic.variable} bg-background`}
     >
       <head>
-        {/* Google Analytics / Google tag */}
+        {/* Google Analytics */}
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-9SQ7G09KBD"
@@ -104,6 +104,14 @@ export default function RootLayout({
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721672829345043"
           crossOrigin="anonymous"
+        />
+
+        {/* Adsterra Popunder */}
+        <Script
+          id="adsterra-popunder"
+          src="https://4xfreedom.com/1/1d5c5e10aa61dd7bee676f8900a62ce2"
+          data-cfasync="false"
+          strategy="afterInteractive"
         />
       </head>
 
