@@ -9,6 +9,7 @@ export function NativeBanner() {
         async
         data-cfasync="false"
         src="https://dcengg.org/21/a40cc5301d05333b76e7df82762da7f4"
+        strategy="afterInteractive"
       />
 
       <div id="container-a40cc5301d05333b76e7df82762da7f4" />
