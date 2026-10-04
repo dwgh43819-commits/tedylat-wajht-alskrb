@@ -17,14 +17,23 @@ const plexArabic = IBM_Plex_Sans_Arabic({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tedylat-wajht-alskrb-mu.vercel.app'),
+  metadataBase: new URL(
+    'https://tedylat-wajht-alskrb-mu.vercel.app'
+  ),
 
-  title: 'TubeLens | محلل فيديوهات يوتيوب وكتابة اسكربت',
+  title:
+    'TubeLens | تحليل الفيديوهات واستخراج النصوص بالذكاء الاصطناعي',
 
   description:
-    'TubeLens أداة لتحليل فيديوهات يوتيوب واكتشاف المشاهدات والكلمات المفتاحية وكتابة اسكربت الفيديو.',
+    'TubeLens أداة ذكية لتحليل الفيديوهات واستخراج النص من الصوت وتحويل الفيديو إلى كتابة وإنشاء اسكربتات بالذكاء الاصطناعي.',
 
   keywords: [
+    'تحليل الفيديو',
+    'تحليل فيديو بالذكاء الاصطناعي',
+    'استخراج النص من الفيديو',
+    'تحويل الفيديو إلى نص',
+    'تفريغ الفيديو',
+    'تحويل الصوت إلى كتابة',
     'تحليل فيديوهات يوتيوب',
     'محلل فيديو يوتيوب',
     'كتابة اسكربت',
@@ -39,12 +48,19 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: 'TubeLens | محلل فيديوهات يوتيوب',
+    title:
+      'TubeLens | تحليل الفيديوهات واستخراج النصوص',
+
     description:
-      'حلل فيديوهات يوتيوب واكتب اسكربتات بالذكاء الاصطناعي.',
-    url: 'https://tedylat-wajht-alskrb-mu.vercel.app',
+      'حلل الفيديوهات واستخرج النصوص واكتب اسكربتات باستخدام الذكاء الاصطناعي.',
+
+    url:
+      'https://tedylat-wajht-alskrb-mu.vercel.app',
+
     siteName: 'TubeLens',
+
     type: 'website',
+
     locale: 'ar_AR',
   },
 
@@ -63,6 +79,7 @@ export const metadata: Metadata = {
         type: 'image/svg+xml',
       },
     ],
+
     apple: '/apple-icon.png',
   },
 }
@@ -83,7 +100,27 @@ export default function RootLayout({
       dir="rtl"
       className={`${inter.variable} ${plexArabic.variable} bg-background`}
     >
+
       <head>
+
+        {/* Google Web App Schema */}
+        <Script
+          id="website-schema"
+          type="application/ld+json"
+        >
+          {`
+          {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "TubeLens",
+            "applicationCategory": "AI Tool",
+            "operatingSystem": "Web",
+            "description": "أداة لتحليل الفيديوهات واستخراج النصوص وتحويل الصوت إلى كتابة باستخدام الذكاء الاصطناعي."
+          }
+          `}
+        </Script>
+
+
         {/* Google Analytics */}
         <Script
           async
@@ -99,12 +136,14 @@ export default function RootLayout({
           `}
         </Script>
 
+
         {/* Google AdSense */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721672829345043"
           crossOrigin="anonymous"
         />
+
 
         {/* Adsterra Popunder */}
         <Script
@@ -114,6 +153,7 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
 
+
         {/* Adsterra DCENGG */}
         <Script
           id="adsterra-dcengg"
@@ -121,13 +161,20 @@ export default function RootLayout({
           data-cfasync="false"
           strategy="afterInteractive"
         />
+
       </head>
 
+
       <body className="antialiased">
+
         {children}
 
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        {process.env.NODE_ENV === 'production' && (
+          <Analytics />
+        )}
+
       </body>
+
     </html>
   )
 }
